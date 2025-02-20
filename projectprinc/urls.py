@@ -21,6 +21,10 @@ from django.urls import path, include
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 
+#Importaciones de APP Heroes
+from heroes.apiheroes.router import router_heroes
+
+
 
 
 schema_view = get_schema_view(
@@ -40,10 +44,6 @@ schema_view = get_schema_view(
 
 
 
-
-
-
-
 urlpatterns = [
     path('admin/', admin.site.urls),
 
@@ -53,8 +53,9 @@ urlpatterns = [
     path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redocs/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 
-
-
     #URLS de apiuser de APP users
-    path('apiuser/', include('users.apiuser.router'))
+    path('apiuser/', include('users.apiuser.router')),
+
+    #URLS de apiheroes de APP heroes
+    path('apiheroes/', include(router_heroes.urls)), 
 ]
